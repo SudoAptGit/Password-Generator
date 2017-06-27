@@ -25,6 +25,51 @@ namespace Password_Generator
             InitializeComponent();
         }
 
+
+        private void generatePW(Random rand, int length, string passwordCharacters, StringBuilder sb)
+        {
+            bool flag = false;
+            for (int i = 0; i < length; i++)
+            {
+                if (passwordCharacters.Length > 0)
+                {
+                    int index = rand.Next(0, passwordCharacters.Length);
+                    if (chkSeq.IsChecked == true)
+                    {
+                        int ascii = (int)passwordCharacters[index];
+                        int previousAscii = 0;
+                        if (i != 0)
+                        {
+                            previousAscii = ((int)sb[i - 1]) + 1;
+                        }
+                        while (i != 0 && ascii == previousAscii)
+                        {
+                            index = rand.Next(0, passwordCharacters.Length);
+                            if (passwordCharacters.Length == 1)
+                            {
+                                flag = true;
+                                break;
+                            }
+                            ascii = (int)passwordCharacters[index];
+                        }
+                    }
+                    if (flag == true)
+                    {
+                        sb = sb.Insert(i-1, passwordCharacters[index]);
+                    }
+                    else
+                    {
+                        sb = sb.Append(passwordCharacters[index]);
+                    }
+                    if (chkDups.IsChecked == true)
+                    {
+                        passwordCharacters = passwordCharacters.Replace(passwordCharacters[index].ToString(), "");
+                    }
+                }
+            }
+            passwordText.Text = sb.ToString();
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder sb = new StringBuilder();
@@ -34,6 +79,12 @@ namespace Password_Generator
             int t = 0;
             string temp = String.Empty;
 
+            //Checks No Similar Checkbox
+            if (chkSimilar.IsChecked == true)
+            {
+                passwordCharacters = @"!#$%&'()*+,-./23456789:;<=>?@ABCDEFGHJKLMNPRSTUVWXYZ[\]^_abcdefghjkmnpqrstuvwxyz{}~";
+            }
+
             //Checks Size box
             if (length.Text != String.Empty)
             {
@@ -42,12 +93,6 @@ namespace Password_Generator
             else
             {
                 t = randIValue.Next(6, 15);
-            }
-
-            //Checks No Similar Checkbox
-            if (chkSimilar.IsChecked == true)
-            {
-                passwordCharacters = @"!#$%&'()*+,-./23456789:;<=>?@ABCDEFGHJKLMNPRSTUVWXYZ[\]^_abcdefghjkmnpqrstuvwxyz{}~";
             }
 
             //Checks Excluded Characters box
@@ -111,53 +156,23 @@ namespace Password_Generator
             }
 
             //Checks Begin with Letter Checkbox
-            if (chkStartLetter.IsChecked == true)
+            if (chkStartLetter.IsChecked == true && (chkUpper.IsChecked == true || chkLower.IsChecked == true))
             {
                 temp = passwordCharacters;
-                foreach (char c in passwordCharacters)
+                foreach (char c in temp)
                 {
                     if (!Char.IsLetter(c))
                     {
                         temp = temp.Replace(c.ToString(), "");
                     }
                 }
+                int index = rand.Next(0, temp.Length);
+                sb = sb.Append(temp[index]);
+                t = t - 1;
+                passwordCharacters = passwordCharacters.Replace(temp[index].ToString(), "");
             }
 
-            //Generator Logic
-            if (passwordCharacters.Length > 0)
-            {
-                if (chkStartLetter.IsChecked == true && (chkUpper.IsChecked == true || chkLower.IsChecked == true))
-                {
-                    int index = rand.Next(0, temp.Length);
-                    sb = sb.Append(temp[index]);
-                    for (int i = 0; i < t-1; i++)
-                    {
-                        index = rand.Next(0, passwordCharacters.Length);
-                        sb = sb.Append(passwordCharacters[index]);
-                    }
-                }
-                else if (chkDups.IsChecked == true)
-                {
-                    for (int i = 0; i < t; i++)
-                    {
-                        if (passwordCharacters.Length > 0)
-                        {
-                            int index = rand.Next(0, passwordCharacters.Length);
-                            sb = sb.Append(passwordCharacters[index]);
-                            passwordCharacters = passwordCharacters.Replace(passwordCharacters[index].ToString(), "");
-                        }
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < t; i++)
-                    {
-                        int index = rand.Next(0, passwordCharacters.Length);
-                        sb = sb.Append(passwordCharacters[index]);
-                    }
-                }
-            }
-            passwordText.Text = sb.ToString();
+            generatePW(rand, t, passwordCharacters, sb);
         }
     }
 }

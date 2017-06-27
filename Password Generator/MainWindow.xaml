@@ -5,43 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Password_Generator"
         mc:Ignorable="d"
-        Title="Password Generator v1.0" SizeToContent="WidthAndHeight" ResizeMode="NoResize" Width="Auto" Height="429.667">
-    <Grid Width="339" Margin="0,0,0,55">
-        <Button Content="Generate" HorizontalAlignment="Left" Margin="134,34,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        Title="Password Generator v1.1" SizeToContent="WidthAndHeight" ResizeMode="NoResize" Width="Auto" Height="450">
+    <Grid Width="339">
+        <Button x:Name="btnGeneratePW" Content="Generate" HorizontalAlignment="Left" Margin="134,34,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <TextBox x:Name="passwordText" HorizontalAlignment="Left" Height="23" Margin="50,77,0,0" MaxLines="1" TextWrapping="NoWrap" VerticalAlignment="Top" Width="240"/>
-        <Expander Header="Advanced" HorizontalAlignment="Left" Margin="0,115,0,-40" VerticalAlignment="Top">
-            <Canvas HorizontalAlignment="Left" Height="250" Margin="10,0,0,0" Width="320">
-                <Label Content="Length" Canvas.Left="4" Width="52"/>
-                <TextBox x:Name="length" Height="23" Canvas.Left="10" TextWrapping="NoWrap" Canvas.Top="24" Width="52"/>
-                <Label Content="Excluded characters" Canvas.Left="85"/>
-                <TextBox x:Name="excluded" Height="23" Canvas.Left="91" TextWrapping="NoWrap" Canvas.Top="24" Width="217"/>
-                <Label x:Name="label" Content="Include Numbers:" Canvas.Left="4" Canvas.Top="56"/>
-                <Label x:Name="label1" Content="Include Symbols:" Canvas.Left="4" Canvas.Top="81"/>
-                <CheckBox x:Name="chkNum" Content="&#xD;&#xA;" Canvas.Left="119" Canvas.Top="62" Height="20" IsChecked="True"/>
-                <CheckBox x:Name="chkSym" Content="&#xD;&#xA;" Canvas.Left="119" Canvas.Top="86" Height="15" IsChecked="True"/>
-                <Label x:Name="label1_Copy" Content="Begin with Letter:" Canvas.Left="3" Canvas.Top="104"/>
-                <CheckBox x:Name="chkStartLetter" Content="&#xD;&#xA;" Canvas.Left="119" Canvas.Top="110" Height="20"/>
-                <Label x:Name="label2" Content="Include lowercase:" Canvas.Left="163" Canvas.Top="56"/>
-                <CheckBox x:Name="chkLower" Content="&#xD;&#xA;" Canvas.Left="282" Canvas.Top="62" Height="22" IsChecked="True"/>
-                <Label x:Name="label3" Content="Include uppercase:" Canvas.Left="163" Canvas.Top="81"/>
-                <CheckBox x:Name="chkUpper" Content="&#xD;&#xA;" Canvas.Left="282" Canvas.Top="87" Height="20" IsChecked="True"/>
-                <Label x:Name="label4" Content="No Duplicates:" Canvas.Left="163" Canvas.Top="104"/>
-                <CheckBox x:Name="chkDups" Content="" Canvas.Left="282" Canvas.Top="110"/>
-                <Label x:Name="label5" Content="No Ambiguous:" Canvas.Left="163" Canvas.Top="127"/>
-                <CheckBox x:Name="chkSimilar" Content="" Canvas.Left="282" Canvas.Top="133" IsChecked="True"/>
-                <Label x:Name="label6" Content="No Sequential:" Canvas.Left="4" Canvas.Top="127"/>
-                <CheckBox x:Name="chkSeq" Content="&#xD;&#xA;" Canvas.Left="119" Canvas.Top="133" Height="16"/>
-                <Label x:Name="label7" Content="No Repeating:" Canvas.Left="4" Canvas.Top="151"/>
-                <CheckBox x:Name="checkBox" Content="" Canvas.Left="119" Canvas.Top="157"/>
-                <Label x:Name="label8" Content="Can't Begin with Number:" Canvas.Left="4" Canvas.Top="177"/>
-                <CheckBox x:Name="checkBox1" Content="" Canvas.Left="155" Canvas.Top="183"/>
-                <Label x:Name="label9" Content="Can't End with Number:" Canvas.Left="4" Canvas.Top="203"/>
-                <CheckBox x:Name="checkBox2" Content="" Canvas.Left="155" Canvas.Top="209"/>
-                <Label x:Name="label10" Content="Can't Begin with #:" Canvas.Left="163" Canvas.Top="151"/>
-                <CheckBox x:Name="checkBox3" Content="" Canvas.Left="282" Canvas.Top="157"/>
-                <Label x:Name="label11" Content="Can't End with Semicolon:" Canvas.Left="4" Canvas.Top="229"/>
-                <CheckBox x:Name="checkBox4" Content="" Canvas.Left="155" Canvas.Top="235"/>
-                <Label x:Name="label12" Content="Created by: Matthew Schmidt" Canvas.Left="185" Canvas.Top="245" FontSize="10"/>
+        <Expander Header="Advanced" HorizontalAlignment="Left" Margin="0,115,0,0" VerticalAlignment="Top">
+            <Canvas HorizontalAlignment="Left" Height="279" Margin="10,0,0,0" Width="320">
+                <Label Content="Length" Canvas.Left="10" Width="52" ToolTip="The exact length of the password"/>
+                <TextBox x:Name="length" Height="23" Canvas.Left="16" TextWrapping="NoWrap" Canvas.Top="24" Width="52"/>
+                <Label Content="Excluded characters" Canvas.Left="91" ToolTip="Characters to be excluded from the password (Do not separate the characters)"/>
+                <TextBox x:Name="excluded" Height="23" Canvas.Left="97" TextWrapping="NoWrap" Canvas.Top="24" Width="217"/>
+                <Label x:Name="label" Content="Include Numbers:" Canvas.Left="10" Canvas.Top="56" AutomationProperties.IsColumnHeader="True" ToolTip="Allow numbers e.g. 1234567890"/>
+                <Label x:Name="label1" Content="Include Symbols:" Canvas.Left="10" Canvas.Top="81" ToolTip="Allow symbols e.g. \|*,'}`-^)]#@!>%+?[.{;$(=_~:/"/>
+                <CheckBox x:Name="chkNum" Content="&#xD;&#xA;" Canvas.Left="125" Canvas.Top="62" Height="20" IsChecked="True"/>
+                <CheckBox x:Name="chkSym" Content="&#xD;&#xA;" Canvas.Left="125" Canvas.Top="86" Height="15" IsChecked="True"/>
+                <Label x:Name="label1_Copy" Content="Begin with Letter:" Canvas.Left="9" Canvas.Top="104" ToolTip="The password must begin with a letter (both upper and lower case are allowed)"/>
+                <CheckBox x:Name="chkStartLetter" Content="&#xD;&#xA;" Canvas.Left="125" Canvas.Top="110" Height="20"/>
+                <Label x:Name="label2" Content="Include lowercase:" Canvas.Left="169" Canvas.Top="56" ToolTip="Allow lowercase e.g. a-z"/>
+                <CheckBox x:Name="chkLower" Content="&#xD;&#xA;" Canvas.Left="288" Canvas.Top="62" Height="22" IsChecked="True"/>
+                <Label x:Name="label3" Content="Include uppercase:" Canvas.Left="169" Canvas.Top="81" ToolTip="Allow uppercase e.g. A-Z"/>
+                <CheckBox x:Name="chkUpper" Content="&#xD;&#xA;" Canvas.Left="288" Canvas.Top="87" Height="20" IsChecked="True"/>
+                <Label x:Name="label4" Content="No Duplicates:" Canvas.Left="169" Canvas.Top="104" ToolTip="A character will only appear once in the password"/>
+                <CheckBox x:Name="chkDups" Content="" Canvas.Left="288" Canvas.Top="110"/>
+                <Label x:Name="label5" Content="No Ambiguous:" Canvas.Left="169" Canvas.Top="127"/>
+                <CheckBox x:Name="chkSimilar" Content="" Canvas.Left="288" Canvas.Top="133" IsChecked="True"/>
+                <Label x:Name="label6" Content="No Sequential:" Canvas.Left="10" Canvas.Top="127" ToolTip="Do not allow sequences e.g. 123 or abc"/>
+                <CheckBox x:Name="chkSeq" Content="&#xD;&#xA;" Canvas.Left="125" Canvas.Top="133" Height="16"/>
+                <Label x:Name="label7" Content="No Repeating:" Canvas.Left="10" Canvas.Top="151" ToolTip="Do not allow a character directly after the same character e.g. 1111"/>
+                <CheckBox x:Name="checkBox" Content="" Canvas.Left="125" Canvas.Top="157"/>
+                <Label x:Name="label8" Content="Can't Begin with Number:" Canvas.Left="10" Canvas.Top="177" ToolTip="Do not allow the first character to be a number"/>
+                <CheckBox x:Name="checkBox1" Content="" Canvas.Left="161" Canvas.Top="183"/>
+                <Label x:Name="label9" Content="Can't End with Number:" Canvas.Left="10" Canvas.Top="203" ToolTip="Do not allow the last character to be a number"/>
+                <CheckBox x:Name="checkBox2" Content="" Canvas.Left="161" Canvas.Top="209"/>
+                <Label x:Name="label10" Content="Can't Begin with #:" Canvas.Left="169" Canvas.Top="151" ToolTip="Do not allow the pound sign to be used as the first character"/>
+                <CheckBox x:Name="checkBox3" Content="" Canvas.Left="288" Canvas.Top="157"/>
+                <Label x:Name="label11" Content="Can't End with Semicolon:" Canvas.Left="10" Canvas.Top="229" ToolTip="Do not allow the last character to be a semicolon"/>
+                <CheckBox x:Name="checkBox4" Content="" Canvas.Left="161" Canvas.Top="235"/>
+                <Label x:Name="label12" Content="Created by: Matthew Schmidt" Canvas.Left="180" Canvas.Top="256" FontSize="10"/>
             </Canvas>
         </Expander>
 
